@@ -14,4 +14,6 @@ function checked(text: string): string {
 const ENTRY = "Bottleneck"
 const outDir = process.env.MAKEFUN_OUTPUT_DIR || "."
 mkdirSync(outDir, { recursive: true })
-writeFileSync(join(outDir, "entry.txt"), checked(ENTRY), "utf8")
+const payload = checked(ENTRY)
+if (payload.split(" ").length !== 1) throw new Error("entry must be one word")
+writeFileSync(join(outDir, "entry.txt"), payload, "utf8")
